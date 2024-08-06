@@ -1,0 +1,21 @@
+@model FormProviderVm
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_Layout";
+}
+
+<h2>@Model.Name</h2>
+
+@Html.Raw(Model.Description)
+
+<form method="post">
+
+
+
+    <div>
+        <a class="btn btn-outline-warning" asp-action="Index" asp-controller="Forms">Voltar</a>
+        <button class="btn btn-outline-secondary" type="submit">Salvar</button>
+    </div>
+    
+</form>

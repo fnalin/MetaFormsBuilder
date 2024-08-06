@@ -1,0 +1,38 @@
+@model FieldAddEditVm
+
+@{
+    var id = ViewContext.RouteData.Values["id"]?.ToString();
+    ViewBag.Title = (id == null ? "Adicionar" : "Editar");
+    ViewBag.SubTitle = (id == null ? "Adicionar novo Field" : $"Editar Field {id}");
+}
+
+<form method="post">
+    <input type="hidden" asp-for="FormId" class="form-control">
+    
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Nome</label>
+        <input asp-for="Name" class="form-control" autofocus>
+        <span asp-validation-for="Name" class="invalid"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="DataTypeId" class="form-label">Tipo de Dados</label>
+        <select asp-for="DataTypeId"
+                asp-items="Model.DataTypes"
+                class="form-select">
+            <option value="">Selecione ...</option>
+        </select>
+        <span asp-validation-for="DataTypeId" class="invalid"></span>
+    </div>
+
+    <div>
+        <a class="btn btn-outline-warning" asp-action="List" asp-controller="Fields" asp-route-formId="@Model.FormId">Voltar</a>
+        <button class="btn btn-outline-secondary" type="submit">Salvar</button>
+    </div>
+
+
+</form>
+
+@section scripts {
+    <partial name="_ScriptsValidate" />
+}

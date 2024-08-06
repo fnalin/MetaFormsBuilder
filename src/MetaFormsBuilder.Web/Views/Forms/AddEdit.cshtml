@@ -1,0 +1,42 @@
+@model AddEditFormsVm
+@{
+    var id = ViewContext.RouteData.Values["id"]?.ToString();
+    ViewBag.Title = (id == null ? "Adicionar" : "Editar");
+    ViewBag.SubTitle = (id == null ? "Adicionar novo Form" : $"Editar Form {id}");
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Nome</label>
+        <input asp-for="Name" class="form-control" autofocus>
+        <span asp-validation-for="Name" class="invalid"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Descrição</label>
+        <input asp-for="Description" class="form-control">
+        <span asp-validation-for="Description" class="invalid"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label">Status</label>
+        <select asp-for="Status"
+                asp-items="@Html.GetEnumSelectList<StatusFormsVm>()"
+                class="form-select">
+            <option value="">Selecione ...</option>
+        </select>
+        <span asp-validation-for="Status" class="invalid"></span>
+    </div>
+
+    <div>
+        <a class="btn btn-outline-warning" asp-action="Index" asp-controller="Forms">Voltar</a>
+        <button class="btn btn-outline-secondary" type="submit">Salvar</button>
+    </div>
+
+
+</form>
+
+@section scripts {
+    <partial name="_ScriptsValidate" />
+}
