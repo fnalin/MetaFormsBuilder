@@ -60,6 +60,13 @@ public class FieldsController (IFieldRepository fieldRepository, IDataTypeReposi
         return RedirectToAction("List", new {formId = model.FormId});
     }
     
+    [HttpPost]
+    public async Task<IActionResult> Details(int fieldId, CancellationToken cancellationToken)
+    {
+        var field = await fieldRepository.GetAsync(fieldId, cancellationToken);
+        return PartialView("_propertiesModal", field.ToVm());
+    }
+    
     [HttpDelete]
     public async Task<IActionResult> Excluir(int id, CancellationToken cancelationToken)
     {

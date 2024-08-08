@@ -1,3 +1,4 @@
+@using MetaFormsBuilder.Domain.Entities
 @model FormProviderVm
 
 @{
@@ -7,15 +8,83 @@
 
 <h2>@Model.Name</h2>
 
-@Html.Raw(Model.Description)
+<p>
+    @Model.Description
+</p>
 
 <form method="post">
 
-
-
+    @foreach (var field in Model.Fields.OrderBy(x => x.DisplayOrder))
+    {
+        switch (field.DataTypeId)
+        {
+            case 1:
+                <div class="form-group">
+                    @Html.Raw(field.Html)
+                </div>
+                break;
+            case 2:
+                <div class="mb-3">
+                    <label for="@field.Name" class="form-label">@field.Name</label>
+                    @if (field.IsRequired)
+                    {
+                        <input id="@field.Name" class="form-control" type="text" data-val="true" data-val-required="campo obrigatório" name="@field.Name" value="">
+                        <span class="invalid field-validation-valid" data-valmsg-for="@field.Name" data-valmsg-replace="true"></span>
+                    }
+                    else
+                    {
+                        <input id="@field.Name" type="text" class="form-control" name="@field.Name" value="">
+                    }
+                </div>
+                break;
+            case 3:
+                <div class="mb-3">
+                    <label for="@field.Name" class="form-label">@field.Name</label>
+                    <textarea class="form-control" id="@field.Name" rows="3"></textarea>
+                </div>
+                break;
+            case 4:
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <label for="@field.Name" class="form-label">@field.Name</label>
+                        @if (field.IsRequired)
+                        {
+                            <input id="@field.Name" class="form-control" type="date" data-val="true" data-val-required="campo obrigatório" name="@field.Name" value="">
+                            <span class="invalid field-validation-valid" data-valmsg-for="@field.Name" data-valmsg-replace="true"></span>
+                        }
+                        else
+                        {
+                            <input id="@field.Name" type="date" class="form-control" name="@field.Name" value="">
+                        }
+                    </div>
+                </div>
+                break;
+            case 5:
+                <div class="mb-3">
+                    <label for="@field.Name" class="form-label">@field.Name</label>
+                    @if (field.IsRequired)
+                    {
+                        <input id="@field.Name" class="form-control" type="datetime-local" data-val="true" data-val-required="campo obrigatório" name="@field.Name" value="">
+                        <span class="invalid field-validation-valid" data-valmsg-for="@field.Name" data-valmsg-replace="true"></span>
+                    }
+                    else
+                    {
+                        <input id="@field.Name" type="datetime-local" class="form-control" name="@field.Name" value="">
+                    }
+                </div>
+                break;
+            default:
+                <span>Não mapeado</span>
+                break;
+        }
+    }
     <div>
         <a class="btn btn-outline-warning" asp-action="Index" asp-controller="Forms">Voltar</a>
         <button class="btn btn-outline-secondary" type="submit">Salvar</button>
     </div>
-    
+
 </form>
+
+@section scripts {
+    <partial name="_ScriptsValidate"/>
+}

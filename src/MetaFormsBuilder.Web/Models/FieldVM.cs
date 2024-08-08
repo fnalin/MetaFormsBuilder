@@ -68,12 +68,13 @@ public static class Mappings {
             Name = dt.Name
         };
 
-    private static FieldVm ToVm(this Field field) => 
+    
+    public static FieldVm ToVm(this Field field) => 
         new FieldVm
         {
             Id = field.Id,
             Name = field.Name,
-            DataType = field.DataType.Name
+            DataType = field.DataType?.Name
         };
     
     

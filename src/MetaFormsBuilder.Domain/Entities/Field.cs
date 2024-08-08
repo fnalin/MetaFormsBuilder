@@ -7,4 +7,11 @@ public class Field : EntityBase
     public Form Form { get; set; } = null!;
     public int DataTypeId { get; set; }
     public DataType DataType { get; set; } = null!;
+
+    public int DisplayOrder { get; set; }
+    
+    public string? Html { get; set; }
+    
+    public bool IsRequired { get; set; }
+    
 }

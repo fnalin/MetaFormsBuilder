@@ -1,15 +1,14 @@
 ﻿name: "metaformbuilder"
 
 volumes:
-  mssql-data:
+  sqlserver-data:
 
 networks:
   app-network:
-    
+
 services:
   sqlserver:
     image: mcr.microsoft.com/azure-sql-edge
-    container_name: sqlserver
     environment:
       ACCEPT_EULA: "1"
       MSSQL_SA_PASSWORD: "123456@qwerty"
@@ -19,7 +18,6 @@ services:
       - "1433:1433"
     networks:
       - app-network
+    restart: always
     volumes:
-      - mssql-data:/var/opt/mssql 
-    
-    
+      - sqlserver-data:/var/opt/mssql

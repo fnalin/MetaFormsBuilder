@@ -9,7 +9,7 @@ public class FormProviderController (IFormRepository formRepository) : Controlle
     [HttpGet]
     public async Task<IActionResult> Submit(int id, CancellationToken cancellationToken)
     {
-        var data = await formRepository.GetAsync(id, cancellationToken);
+        var data = await formRepository.GetWithAllDataAsync(id, cancellationToken);
         var model = data.ToFormProviderVm();
         return View(model);
     }

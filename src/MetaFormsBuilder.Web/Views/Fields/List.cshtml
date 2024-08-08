@@ -10,10 +10,10 @@
 <p>Listagem de Campos</p>
 
 <div>
-    <a asp-action="AddEdit" asp-controller="Fields"   asp-route-formId="@Model.FormId" class="btn btn-outline-secondary">Criar</a>
+    <a asp-action="AddEdit" asp-controller="Fields" asp-route-formId="@Model.FormId" class="btn btn-outline-secondary">Criar</a>
 </div>
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover" id="fieldsGrid">
     <thead>
     <tr>
         <th>Id</th>
@@ -30,19 +30,79 @@
             <td>@item.Name</td>
             <td>@item.DataType</td>
             <td>
-                <a class="btn btn-outline-success btn-sm"
-                   asp-action="AddEdit" asp-controller="Fields"
-                   asp-route-id="@item.Id" asp-route-formid="@Model.FormId">Editar</a>
-                <button class="btn btn-outline-danger btn-sm" onclick="del(@item.Id, '@item.Name', 'Fields', '@Url.Action("Excluir", "Fields")')">
-                    Excluir
-                </button>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Ações
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item details" href="#">Propriedades</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Detalhes</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-action="AddEdit" asp-controller="Fields"
+                               asp-route-id="@item.Id" asp-route-formid="@Model.FormId">
+                                Editar
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" onclick="del(@item.Id, '@item.Name', 'Fields', '@Url.Action("Excluir", "Fields")')">
+                                Excluir
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </td>
         </tr>
     }
     </tbody>
 </table>
 
-<partial name="_delModal" />
+<partial name="_delModal"/>
+
+<div class="modal fade" id="partialModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Detalhes do Campo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts {
     <script src="~/js/list.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#fieldsGrid .details").click(function () {
+                var fieldId = $(this).closest("tr").find("td").eq(0).html();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Details", "Fields")',
+                    data: { "fieldId": fieldId },
+                    success: function (response) {
+                        $("#partialModal").find(".modal-body").html(response);
+                        $("#partialModal").modal('show');
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 }
