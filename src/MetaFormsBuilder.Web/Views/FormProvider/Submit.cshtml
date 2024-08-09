@@ -13,7 +13,8 @@
 </p>
 
 <form method="post">
-
+    <input type="hidden" value="@Model.Id" name="FormId">
+    
     @foreach (var field in Model.Fields.OrderBy(x => x.DisplayOrder))
     {
         switch (field.DataTypeId)
@@ -40,7 +41,7 @@
             case 3:
                 <div class="mb-3">
                     <label for="@field.Name" class="form-label">@field.Name</label>
-                    <textarea class="form-control" id="@field.Name" rows="3"></textarea>
+                    <textarea class="form-control" id="@field.Name" rows="3" name="@field.Name"></textarea>
                 </div>
                 break;
             case 4:

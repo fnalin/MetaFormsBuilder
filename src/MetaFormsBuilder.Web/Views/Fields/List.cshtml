@@ -69,18 +69,24 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Detalhes do Campo</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <form method="post">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" onclick="addata()">Salvar</button>
+                </div>
                 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Salvar</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 
+
 @section scripts {
+    <partial name="_ScriptsValidate" />
+    
     <script src="~/js/list.js"></script>
 
     <script type="text/javascript">
@@ -103,6 +109,31 @@
                     }
                 });
             });
+
+
+            function addata() {
+                var objdata =
+                    {
+                        vender_Name: $('#VenderName').val()
+                    };
+                    
+                $.validator.unobtrusive.parse($("#myform"));
+                if ($("#myform").valid()) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Home/InserData',
+                        data: objdata,
+                        dataType: 'json',
+                        dataType: 'json',
+                        success: function () {
+                            alert("Save")
+                        },
+                        error: function () {
+                            alert("Not Saved")
+                        }
+                    });
+                }
+            }
         });
     </script>
 }

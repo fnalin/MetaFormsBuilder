@@ -1,17 +1,13 @@
 @model FieldVm
 
-<form>
-    <div class="mb-3">
-        <label for="recipient-name" class="col-form-label">Name:</label>
-        <input type="text" class="form-control" id="recipient-name">
-    </div>
-    <div class="mb-3">
-        <label for="message-text" class="col-form-label">Description:</label>
-        <textarea class="form-control" id="message-text"></textarea>
-    </div>
-</form>
-
-@section Scripts{
-
-}
+<div class="mb-3">
+    <label asp-for="@Model.Html" class="form-label"></label>
+    <input asp-for="@Model.Html" class="form-control">
+    <span asp-validation-for="@Model.Html" class="invalid"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="@Model.DisplayOrder" class="form-label"></label>
+    <input asp-for="@Model.DisplayOrder" class="form-control">
+    <span asp-validation-for="@Model.DisplayOrder" class="invalid"></span>
+</div>
 

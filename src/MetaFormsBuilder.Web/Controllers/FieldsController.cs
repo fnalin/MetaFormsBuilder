@@ -63,7 +63,7 @@ public class FieldsController (IFieldRepository fieldRepository, IDataTypeReposi
     [HttpPost]
     public async Task<IActionResult> Details(int fieldId, CancellationToken cancellationToken)
     {
-        var field = await fieldRepository.GetAsync(fieldId, cancellationToken);
+        var field = await fieldRepository.GetWithAllDataAsync(fieldId, cancellationToken);
         return PartialView("_propertiesModal", field.ToVm());
     }
     

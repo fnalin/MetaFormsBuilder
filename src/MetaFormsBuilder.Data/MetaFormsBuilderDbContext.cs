@@ -13,6 +13,10 @@ public sealed class MetaFormsBuilderDbContext: DbContext
     
     public DbSet<Form> Forms => Set<Form>();
     public DbSet<Field> Fields => Set<Field>();
+    public DbSet<DataType> DataTypes => Set<DataType>();
+    public DbSet<FormSubmited> FormSubmiteds => Set<FormSubmited>();
+    public DbSet<FieldSubmited> FieldSubmiteds => Set<FieldSubmited>();
+    
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

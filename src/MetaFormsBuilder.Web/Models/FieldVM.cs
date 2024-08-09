@@ -25,6 +25,9 @@ public class FieldVm
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string DataType { get; set; } = null!;
+    public int DisplayOrder { get; set; }
+    public string? Html { get; set; }
+    public bool IsRequired { get; set; }
 }
 
 public class DataTypeVm
@@ -74,7 +77,9 @@ public static class Mappings {
         {
             Id = field.Id,
             Name = field.Name,
-            DataType = field.DataType?.Name
+            DataType = field.DataType.Name,
+            DisplayOrder = field.DisplayOrder,
+            Html = field.Html,
         };
     
     

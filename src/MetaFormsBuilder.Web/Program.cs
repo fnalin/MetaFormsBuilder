@@ -21,6 +21,7 @@ builder.Services.AddDbContext<MetaFormsBuilderDbContext>(options =>
 builder.Services.AddTransient<IFormRepository, FormRepository>();
 builder.Services.AddTransient<IFieldRepository, FieldRepository>();
 builder.Services.AddTransient<IDataTypeRepository, DataTypeRepository>();
+builder.Services.AddTransient<IFormSubmitedRepository, FormSubmitedRepository>();
 builder.Services.AddScoped<IUoW, UoW>();
 
 var app = builder.Build();

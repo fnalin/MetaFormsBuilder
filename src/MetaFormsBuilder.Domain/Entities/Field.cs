@@ -13,5 +13,7 @@ public class Field : EntityBase
     public string? Html { get; set; }
     
     public bool IsRequired { get; set; }
-    
+
+    public IEnumerable<FieldSubmited> FieldSubmiteds { get; set; } = new List<FieldSubmited>();
+
 }

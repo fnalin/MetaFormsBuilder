@@ -20,10 +20,10 @@ public class FieldMap: IEntityTypeConfiguration<Field>
 
         builder.HasData(
             new Field() { Id = 1, Name = "Personal Info", FormId = 1, DataTypeId = 1, Html = "<h3>Personal Info</h3>", DisplayOrder  = 0, IsRequired = false},
-            new Field() { Id = 2, Name = "First Name", FormId = 1, DataTypeId = 2, DisplayOrder  = 1, IsRequired = true},
-            new Field() { Id = 3, Name = "Last Name", FormId = 1, DataTypeId = 2, DisplayOrder  = 2, IsRequired = true},
+            new Field() { Id = 2, Name = "FirstName", FormId = 1, DataTypeId = 2, DisplayOrder  = 1, IsRequired = true},
+            new Field() { Id = 3, Name = "LastName", FormId = 1, DataTypeId = 2, DisplayOrder  = 2, IsRequired = true},
             new Field() { Id = 4, Name = "BirthDate", FormId = 1, DataTypeId = 4, DisplayOrder  = 3, IsRequired = true},
-            new Field() { Id = 5, Name = "Details", FormId = 1, DataTypeId = 3, DisplayOrder  = 4, IsRequired = false}
+            new Field() { Id = 5, Name = "Obs", FormId = 1, DataTypeId = 3, DisplayOrder  = 4, IsRequired = false}
         );
     }
 }
