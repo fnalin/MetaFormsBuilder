@@ -12,6 +12,7 @@ public class FormRepository(MetaFormsBuilderDbContext ctx) : GenericRepository<F
         var data = 
                     await ctx.Forms
                                 .Include(x=>x.Fields)
+                                    .ThenInclude(x=>x.Fields)
                                 .FirstOrDefaultAsync(x=>x.Id == id, cancellationToken);
         return data ?? throw new NotFoundException("Form not found");
     }

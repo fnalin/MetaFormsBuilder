@@ -14,6 +14,11 @@ public class Field : EntityBase
     
     public bool IsRequired { get; set; }
 
+    public int? FieldId { get; set; }
+    public Field? FieldItem { get; set; }
+    public IEnumerable<Field> Fields { get; set; } = new List<Field>();
+    
+
     public IEnumerable<FieldSubmited> FieldSubmiteds { get; set; } = new List<FieldSubmited>();
 
 }

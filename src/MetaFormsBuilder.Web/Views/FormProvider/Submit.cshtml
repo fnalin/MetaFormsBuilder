@@ -1,4 +1,4 @@
-@using MetaFormsBuilder.Domain.Entities
+
 @model FormProviderVm
 
 @{
@@ -73,6 +73,45 @@
                         <input id="@field.Name" type="datetime-local" class="form-control" name="@field.Name" value="">
                     }
                 </div>
+                break;
+            case 6:
+                <div class="mb-3">
+                    <label for="@field.Name" class="form-label">@field.Name</label>
+                   
+                    @if (field.IsRequired)
+                    {
+                        <input id="@field.Name" class="form-control" type="file" data-val="true" data-val-required="campo obrigatório" name="@field.Name" value="">
+                        <span class="invalid field-validation-valid" data-valmsg-for="@field.Name" data-valmsg-replace="true"></span>
+                    }
+                    else
+                    {
+                        <input id="@field.Name" type="file" class="form-control" name="@field.Name" value="">
+                    }
+                </div>
+                break;
+            case 7:
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="@field.Name" name="@field.Name">
+                    <label class="form-check-label" for="@field.Name">
+                        @field.Name
+                    </label>
+                </div>
+                
+                break;
+            case 8:
+                if (field.FieldId is null && field.Fields is not null)
+                {
+                    <hr/>
+                    foreach (var check in field.Fields)
+                    {
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="@check.Name" value="@check.Name" name="@field.Name">
+                            <label class="form-check-label" for="@check.Name">@check.Name</label>
+                        </div>
+                    }
+                    <hr/>
+                }
                 break;
             default:
                 <span>Não mapeado</span>
