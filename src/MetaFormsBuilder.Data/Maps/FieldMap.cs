@@ -13,6 +13,9 @@ public class FieldMap: IEntityTypeConfiguration<Field>
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
         
         builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
+        builder.Property(x => x.Html).HasMaxLength(500);
+        builder.Property(x => x.FileExtensionsAttribute).HasMaxLength(255);
+        builder.Property(x => x.RegularExpressionAttribute).HasMaxLength(255);
         
         builder.HasOne<Form>(x=>x.Form).WithMany(x=>x.Fields).HasForeignKey(x=>x.FormId);
         builder.HasOne<DataType>(x=>x.DataType).WithMany(x=>x.Fields).HasForeignKey(x=>x.DataTypeId);

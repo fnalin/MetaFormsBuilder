@@ -31,13 +31,9 @@ public class Field : EntityBase
     //expressão regular
     public string? RegularExpressionAttribute { get; set; }
     
-    
-
     public int? FieldId { get; set; }
     public Field? FieldItem { get; set; }
     public IEnumerable<Field> Fields { get; set; } = new List<Field>();
-    
 
     public IEnumerable<FieldSubmited> FieldSubmiteds { get; set; } = new List<FieldSubmited>();
-
 }
