@@ -7,10 +7,12 @@ namespace MetaFormsBuilder.Data.Repositories;
 
 public class FormRepository(MetaFormsBuilderDbContext ctx) : GenericRepository<Form>(ctx), IFormRepository
 {
+    private readonly MetaFormsBuilderDbContext _ctx = ctx;
+
     public async Task<Form> GetWithAllDataAsync(int id, CancellationToken cancellationToken)
     {
         var data = 
-                    await ctx.Forms
+                    await _ctx.Forms
                                 .Include(x=>x.Fields)
                                     .ThenInclude(x=>x.Fields)
                                 .FirstOrDefaultAsync(x=>x.Id == id, cancellationToken);

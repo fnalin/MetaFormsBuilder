@@ -5,7 +5,7 @@ namespace MetaFormsBuilder.Web.Models;
 public class FormProviderVm
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
     public string? Description { get; set; }
     public IEnumerable<FieldFormProviderVm> Fields { get; set; } = new List<FieldFormProviderVm>();
 }

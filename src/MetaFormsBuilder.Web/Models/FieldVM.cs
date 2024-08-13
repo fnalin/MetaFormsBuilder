@@ -33,7 +33,7 @@ public class FieldVm
 public class DataTypeVm
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 }
 
 public static class Mappings {
